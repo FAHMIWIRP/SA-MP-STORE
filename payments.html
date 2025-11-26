@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA-MP - Payments</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a1a3c;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: black;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        
+        .btn-kembali {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        background: #1e88ff;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+        }
+
+        .btn-kembali:hover {
+            background: #0d6cd6;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Form Pembayaran & Order</h2>
+
+        <label>Nama</label>
+        <input type="text" id="nama" placeholder="Masukkan nama kamu">
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Masukkan email kamu">
+
+        <label>Pilih Layanan</label>
+        <select id="layanan">
+            <option value="Scripting Pawn">Scripting Pawn</option>
+            <option value="Mapping">Mapping</option>
+            <option value="Textdraw">Textdraw</option>
+            <option value="Fix Bug">Fix Bug</option>
+        </select>
+
+        <label>Deskripsi Order</label>
+        <textarea id="deskripsi" placeholder="Tulis orderan kamu secara detail..."></textarea>
+
+        <button onclick="kirimWA()">Kirim ke WhatsApp</button> <br>
+        <a href="index.html" class="btn-kembali">Kembali</a>
+    </div>
+
+
+<script>
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let email = document.getElementById("email").value;
+    let layanan = document.getElementById("layanan").value;
+    let deskripsi = document.getElementById("deskripsi").value;
+    let phone = "6283803770518";
+
+    if(nama.trim() === ""  email.trim() === ""  deskripsi.trim() === ""){
+        alert("Semua data harus diisi!");
+        return;
+    }
+
+    let message =
+        "📌 *Order Baru dari Website*\n\n" +
+        "👤 Nama: " + nama + "\n" +
+        "📧 Email: " + email + "\n" +
+        "🛒 Layanan: " + layanan + "\n" +
+        "📝 Deskripsi:\n" + deskripsi;
+
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+</script>
+</body>
+</html>

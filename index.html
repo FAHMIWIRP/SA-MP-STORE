@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA-MP - Beranda</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-logo">SA-MP - Beranda</div>
+        <nav class="nav-link">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Kontak Owner</a>
+        </nav>
+    </header>
+    <div class="content">
+    <video autoplay loop muted playsinline class="bg-video">
+        <source src="assets/videos/bg-video.mp4" type="video/mp4">
+    </video>
+
+    <h1>Selamat Datang</h1>
+    <p>
+        Saya Sebagai Owner menyediakan layanan Jasa untuk mempermudah anda dalam
+        Mengembangkan Server. Maka Dari itu saya membuat sebuah website dimana kalian dapat membuat orderan
+        Dan Melihat Daftar Menu Yang tersedia...
+    </p>
+    <a href="menu.html">Daftar Menu</a>
+</div>
+    </div>
+
+    <footer class="footer">
+    <h3>Supported By</h3>
+
+    <div class="support-logos">
+        <div class="logo-box">
+            <img src="assets/images/chatgpt.jpg" alt="ChatGPT">
+        </div>
+        <div class="logo-box">
+            <img src="assets/images/axisnet.jpg" alt="Axisnet">
+        </div>
+        <div class="logo-box">
+            <img src="assets/images/emyu.jpg" alt="United Apps">
+        </div>
+        <div class="logo-box">
+            <img src="assets/images/samplogo.jpg" alt="SA-MP">
+        </div>
+    </div>
+
+    <p class="footer-text">© 2025 — All Rights Reserved</p>
+    </footer>
+    
+    <button id="sound-btn" class="sound-btn">🔇 OFF</button>
+    
+    <audio id="bgm" loop>
+        <source src="assets/audios/instrumen.mp3" type="audio/mp3">
+    </audio>
+    
+    <script>
+    let audio = document.getElementById("bgm");
+    let btn = document.getElementById("sound-btn");
+    let isPlaying = false;
+    
+    // Klik tombol ubah ON/OFF
+    btn.addEventListener("click", function () {
+        toggleSound();
+    });
+    
+    // Klik di mana saja audio ON pertama kali
+    document.addEventListener("click", function () {
+        if (!isPlaying) {
+            toggleSound();
+        }
+    }, { once: true });
+    
+    function toggleSound() {
+        if (isPlaying) {
+            audio.pause();
+            btn.textContent = "🔇 OFF";
+            isPlaying = false;
+        } else {
+            audio.play();
+            btn.textContent = "🔊 ON";
+            isPlaying = true;
+        }
+    }
+    </script>
+
+</body>
+</html>

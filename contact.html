@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA-MP - Kontak</title>
+    <link rel="stylesheet" href="assets/contact.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="nav-logo">SA-MP - Kontak</div>
+    <nav class="nav-link">
+        <a href="index.html">Beranda</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Kontak</a>
+    </nav>
+</header>
+
+<section class="contact-container">
+    <div class="contact-card">
+
+        <h1>Hubungi Saya</h1>
+        <p class="subtitle">Silakan hubungi saya jika ingin order atau bertanya seputar layanan.</p>
+
+        <div class="contact-info">
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/6283803770518?=Halo%20Bang">+62-838-0377-0518</a></p>
+            <p><strong>Email:</strong> <a href="mailto:fahmiwirp@gmail.com">fahmiwirp@gmail.com</a></p>
+            <p><strong>Instagram:</strong> <a href="https://instagram.com/fahmiwirp">@fahmiwirp</a></p>
+        </div>
+
+        <h2>Kirim Pesan</h2>
+
+        <form class="contact-form">
+            <input type="text" placeholder="Nama Anda" required>
+            <input type="email" placeholder="Email Anda" required>
+            <textarea placeholder="Tulis pesan Anda..." required></textarea>
+            <button type="submit">Kirim Pesan</button>
+        </form>
+
+    </div>
+</section>
+<script>
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let email = document.getElementById("email").value;
+    let layanan = document.getElementById("layanan").value;
+    let deskripsi = document.getElementById("deskripsi").value;
+    let phone = "6283803770518";
+
+    if(nama.trim() === ""  email.trim() === ""  deskripsi.trim() === ""){
+        alert("Semua data harus diisi!");
+        return;
+    }
+
+    let message =
+        "📌 *Order Baru dari Website*\n\n" +
+        "👤 Nama: " + nama + "\n" +
+        "📧 Email: " + email + "\n" +
+        "🛒 Layanan: " + layanan + "\n" +
+        "📝 Deskripsi:\n" + deskripsi;
+
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+</script>
+</body>
+</html>
