@@ -122,9 +122,9 @@ function kirimWA() {
     let deskripsi = document.getElementById("deskripsi").value;
     let phone = "6283803770518";
 
-    if(nama.trim() === ""  email.trim() === ""  deskripsi.trim() === ""){
-        alert("Semua data harus diisi!");
-        return;
+    if(nama.trim() === "" || email.trim() === "" || deskripsi.trim() === ""){
+    alert("Semua data harus diisi!");
+    return;
     }
 
     let message =
@@ -140,4 +140,5 @@ function kirimWA() {
 }
 </script>
 </body>
+
 </html>
