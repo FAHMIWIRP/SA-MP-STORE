@@ -193,7 +193,11 @@
 
       window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
   }
+    setTimeout(() => {
+    window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
+}, 1000);
 </script>
 </body>
 </html>
+
 
