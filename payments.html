@@ -66,7 +66,7 @@
         button:hover {
             background: darkblue;
         }
-        
+
         .btn-kembali {
         display: block;
         width: 100%;
@@ -118,10 +118,11 @@
 
     </div>
 
+<script type="module">
+import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
 
+emailjs.init("wVNA4b9j45kVeS3yb"); // Public key
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
 function previewFoto() {
     let file = document.getElementById("foto").files[0];
     let preview = document.getElementById("preview");
@@ -134,26 +135,21 @@ function previewFoto() {
     }
 }
 
-(function(){
-    emailjs.init("wVNA4b9j45kVeS3yb"); // Public Key EmailJS kamu
-})();
-
-async function kirimData() {
+window.kirimData = async function () {
     let nama = document.getElementById("nama").value;
     let email = document.getElementById("email").value;
     let layanan = document.getElementById("layanan").value;
     let deskripsi = document.getElementById("deskripsi").value;
     let fotoFile = document.getElementById("foto").files[0];
 
-    if(nama.trim() === "" || email.trim() === "" || deskripsi.trim() === ""){
+    if (nama.trim() === "" || email.trim() === "" || deskripsi.trim() === "") {
         alert("Semua data wajib diisi kecuali foto!");
         return;
     }
 
     let fotoURL = "Tidak ada foto yang dikirim";
 
-    // Upload foto ke ImgBB
-    if(fotoFile){
+    if (fotoFile) {
         let formData = new FormData();
         formData.append("image", fotoFile);
 
@@ -166,7 +162,6 @@ async function kirimData() {
         fotoURL = result.data.url;
     }
 
-    // Kirim ke EmailJS
     emailjs.send("service_rw9nz2n", "template_akw5xxb", {
         name: nama,
         email: email,
@@ -180,7 +175,6 @@ async function kirimData() {
         alert("Gagal mengirim email: " + JSON.stringify(error));
     });
 
-    // Kirim ke WhatsApp
     let phone = "6283803770518";
     let message =
         "📌 *Order Baru*\n\n" +
@@ -193,6 +187,6 @@ async function kirimData() {
     window.open(url, "_blank");
 }
 </script>
+
 </body>
 </html>
-
