@@ -68,17 +68,17 @@
         }
 
         .btn-kembali {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        margin-top: 12px;
-        background: #1e88ff;
-        color: white;
-        text-align: center;
-        border-radius: 8px;
-        font-weight: bold;
-        text-decoration: none;
-        transition: 0.3s;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            background: #1e88ff;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
         }
 
         .btn-kembali:hover {
@@ -89,33 +89,33 @@
 </head>
 <body>
 
-    <div class="form-container"><h2>Form Pembayaran & Order</h2>
+    <div class="form-container">
+        <h2>Form Pembayaran & Order</h2>
 
-<label>Nama</label>
-<input type="text" id="nama" placeholder="Masukkan nama kamu">
+        <label>Nama</label>
+        <input type="text" id="nama" placeholder="Masukkan nama kamu">
 
-<label>Email</label>
-<input type="email" id="email" placeholder="Masukkan email kamu">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Masukkan email kamu">
 
-<label>Pilih Layanan</label>
-<select id="layanan">
-    <option value="Scripting Pawn">Scripting Pawn</option>
-    <option value="Mapping">Mapping</option>
-    <option value="Textdraw">Textdraw</option>
-    <option value="Fix Bug">Fix Bug</option>
-</select>
+        <label>Pilih Layanan</label>
+        <select id="layanan">
+            <option value="Scripting Pawn">Scripting Pawn</option>
+            <option value="Mapping">Mapping</option>
+            <option value="Textdraw">Textdraw</option>
+            <option value="Fix Bug">Fix Bug</option>
+        </select>
 
-<label>Upload Foto (Opsional)</label>
-<input type="file" id="foto" accept="image/*" onchange="previewFoto()">
+        <label>Upload Foto (Opsional)</label>
+        <input type="file" id="foto" accept="image/*" onchange="previewFoto()">
 
-<img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:8px;">
+        <img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:8px;">
 
-<label>Deskripsi Order</label>
-<textarea id="deskripsi" placeholder="Tulis orderan kamu secara detail..."></textarea>
+        <label>Deskripsi Order</label>
+        <textarea id="deskripsi" placeholder="Tulis orderan kamu secara detail..."></textarea>
 
-<button onclick="kirimData()">Kirim Order</button>
-<a href="index.html" class="btn-kembali">Kembali</a>
-
+        <button onclick="kirimData()">Kirim Order</button>
+        <a href="index.html" class="btn-kembali">Kembali</a>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -188,25 +188,20 @@ async function kirimData() {
 
     let phone = "6283803770518";
     let message =
-    "📌 *Order Baru*\n\n" +
-    "👤 Nama: " + nama + "\n" +
-    "📧 Email: " + email + "\n" +
-    "🛒 Layanan: " + layanan + "\n" +
-    "📝 Deskripsi:\n" + deskripsi + "\n" +
-    (fotoURL !== "Tidak ada foto yang dikirim"
-        ? "\n📎 Foto: " + fotoURL + "\n"
-        : "") +
-    "\n⏰ Waktu: " + new Date().toLocaleString();
+        "📌 *Order Baru*\n\n" +
+        "👤 Nama: " + nama + "\n" +
+        "📧 Email: " + email + "\n" +
+        "🛒 Layanan: " + layanan + "\n" +
+        "📝 Deskripsi:\n" + deskripsi + "\n" +
+        (fotoURL !== "Tidak ada foto yang dikirim"
+            ? "\n📎 Foto: " + fotoURL + "\n"
+            : "") +
+        "\n⏰ Waktu: " + new Date().toLocaleString();
 
-setTimeout(() => {
-    window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
-}, 1500);
+    setTimeout(() => {
+        window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
+    }, 1500);
+}
 </script>
 </body>
 </html>
-
-
-
-
-
-
