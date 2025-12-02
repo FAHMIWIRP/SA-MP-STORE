@@ -37,12 +37,6 @@
             <input type="email" id="email" placeholder="Email Anda" required>
             <textarea id="deskripsi" placeholder="Tulis pesan Anda..." required></textarea>
 
-            <select id="layanan">
-                <option value="Scripting Pawn">Scripting Pawn</option>
-                <option value="Edit Mapping">Edit Mapping</option>
-                <option value="Install Server">Install Server</option>
-            </select>
-
             <button type="submit">Kirim Pesan ke WhatsApp</button>
         </form>
 
@@ -54,7 +48,6 @@
 function kirimWA() {
     let nama = document.getElementById("nama").value;
     let email = document.getElementById("email").value;
-    let layanan = document.getElementById("layanan").value;
     let deskripsi = document.getElementById("deskripsi").value;
     let phone = "6283803770518";
 
@@ -64,12 +57,10 @@ function kirimWA() {
     }
 
     let message =
-        "📩 *Order Baru dari Website* \n\n" +
+        "📩 *Pesan Baru dari Pengunjung Website* \n\n" +
         "👤 Nama: " + nama + "\n" +
         "📧 Email: " + email + "\n" +
-        "🛍️ Layanan: " + layanan + "\n" +
         "📝 Deskripsi:\n" + deskripsi;
-
     let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
     window.open(url, "_blank");
 }
