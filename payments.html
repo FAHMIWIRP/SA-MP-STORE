@@ -188,18 +188,23 @@ async function kirimData() {
 
     let phone = "6283803770518";
     let message =
-        "📌 *Order Baru*\n\n" +
-        "👤 Nama: " + nama + "\n" +
-        "📧 Email: " + email + "\n" +
-        "🛒 Layanan: " + layanan + "\n" +
-        "📝 Deskripsi:\n" + deskripsi + "\n" +
-        "📎 Foto: " + fotoURL;
+    "📌 *Order Baru*\n\n" +
+    "👤 Nama: " + nama + "\n" +
+    "📧 Email: " + email + "\n" +
+    "🛒 Layanan: " + layanan + "\n" +
+    "📝 Deskripsi:\n" + deskripsi + "\n" +
+    (fotoURL !== "Tidak ada foto yang dikirim"
+        ? "\n📎 Foto: " + fotoURL + "\n"
+        : "") +
+    "\n⏰ Waktu: " + new Date().toLocaleString();
 
+setTimeout(() => {
     window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
-}
+}, 1500);
 </script>
 </body>
 </html>
+
 
 
 
