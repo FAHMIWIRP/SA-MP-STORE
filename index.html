@@ -191,13 +191,17 @@ function aiSearch(){
  if(results.length===0){
   box.innerHTML=`<div class="search-item">AI tidak menemukan hasil relevan</div>`;
  } else {
-  results.forEach(item=>{
-   box.innerHTML+=`
-   <div class="search-item" onclick="goPage('${item.page}')">
-     <div class="search-title">${highlight(item.title,input)}</div>
-     <div class="search-desc">${highlight(item.desc,input)}</div>
-   </div>`;
-  });
+  results.forEach(r=>{
+ const reg = new RegExp(keyword,"gi");
+ const title = r.title.replace(reg, m=>`<span class='highlight'>${m}</span>`);
+ const desc = r.desc.replace(reg, m=>`<span class='highlight'>${m}</span>`);
+ resultsBox.innerHTML += `
+   <div class="search-item" onclick="location.href='${r.url}?q=${encodeURIComponent(keyword)}'">
+     <div class="search-title">${title}</div>
+     <div class="search-desc">${desc}</div>
+   </div>
+ `;
+});
  }
 
  box.style.display="block";
@@ -234,6 +238,17 @@ function searchKey(e){
  items.forEach(i=>i.classList.remove("active"));
  if(items[activeIndex]) items[activeIndex].classList.add("active");
 }
+const params = new URLSearchParams(window.location.search);
+const keyword = params.get("q");
+
+if(keyword){
+ const bodyText = document.body.innerHTML;
+ const reg = new RegExp(`(${keyword})`, "gi");
+
+ document.body.innerHTML = bodyText.replace(reg,
+   `<span class="text-highlight">$1</span>`
+ );
+}    
 </script>
 </body>
 </html>
