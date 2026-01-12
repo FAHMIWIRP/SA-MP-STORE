@@ -2,14 +2,25 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+
+    <title>Kontak SAMP Store - Order Jasa SA-MP</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Hubungi SAMP Store untuk order jasa SA-MP, scripting Pawn, mapping, textdraw, dan fix bug gamemode profesional.">
+    <meta name="keywords" content="Kontak SAMP Store, Order SA-MP, Jasa SA-MP, Developer SA-MP">
+    <meta name="author" content="SAMP Store">
+    <meta name="robots" content="index, follow">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA-MP - Kontak</title>
+
+    <link rel="canonical" href="https://sampstore.my.id/contact.html">
+
     <link rel="stylesheet" href="assets/contact.css">
 </head>
 <body>
 
 <header class="navbar">
-    <div class="nav-logo">SA-MP - Kontak</div>
+    <div class="nav-logo">SAMP Store</div>
     <nav class="nav-link">
         <a href="index.html">Beranda</a>
         <a href="menu.html">Menu</a>
@@ -18,19 +29,37 @@
     </nav>
 </header>
 
+<main>
+
 <section class="contact-container">
     <div class="contact-card">
 
-        <h1>Hubungi Saya</h1>
-        <p class="subtitle">Silakan hubungi saya jika ingin order atau bertanya seputar layanan.</p>
+        <h1>Hubungi SAMP Store</h1>
+        <p class="subtitle">
+            Silakan hubungi kami untuk order jasa SA-MP atau pertanyaan seputar layanan.
+        </p>
 
         <div class="contact-info">
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/6283803770518?text=Halo%20Bang">+62-838-0377-0518</a></p>
-            <p><strong>Email:</strong> <a href="mailto:fahmiwirp@gmail.com">fahmiwirp@gmail.com</a></p>
-            <p><strong>Instagram:</strong> <a href="https://instagram.com/fahmiwirp">@fahmiwirp</a></p>
+            <p><strong>WhatsApp:</strong> 
+                <a href="https://wa.me/6283803770518?text=Halo%20SAMP%20Store">
+                    +62-838-0377-0518
+                </a>
+            </p>
+
+            <p><strong>Email:</strong> 
+                <a href="mailto:fahmiwirp@gmail.com">
+                    fahmiwirp@gmail.com
+                </a>
+            </p>
+
+            <p><strong>Instagram:</strong> 
+                <a href="https://instagram.com/fahmiwirp" target="_blank">
+                    @fahmiwirp
+                </a>
+            </p>
         </div>
 
-        <h2>Kirim Pesan</h2>
+        <h2>Kirim Pesan Order</h2>
 
         <form class="contact-form" onsubmit="kirimWA(); return false;">
             <input type="text" id="nama" placeholder="Nama Anda" required>
@@ -43,6 +72,7 @@
     </div>
 </section>
 
+</main>
 
 <script>
 function kirimWA() {
@@ -57,10 +87,11 @@ function kirimWA() {
     }
 
     let message =
-        "📩 *Pesan Baru dari Pengunjung Website* \n\n" +
+        "📩 *Pesan Baru dari Website SAMP Store* \n\n" +
         "👤 Nama: " + nama + "\n" +
         "📧 Email: " + email + "\n" +
         "📝 Deskripsi:\n" + deskripsi;
+
     let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
     window.open(url, "_blank");
 }
