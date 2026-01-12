@@ -28,16 +28,18 @@
 
 <header class="navbar">
     <div class="nav-logo">SAMP Store</div>
+
     <nav class="nav-link">
-        <a href="index.html" class="active">Beranda</a>
+        <a href="index.html">Beranda</a>
         <a href="menu.html">Menu</a>
         <a href="about.html">About</a>
-        <a href="contact.html">Kontak Owner</a>
+        <a href="contact.html">Kontak</a>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari layanan...">
+            <button onclick="searchWebsite()">Cari</button>
+        </div>
     </nav>
-    <div class="search-box">
-       <input type="text" id="searchInput" placeholder="Cari layanan...">
-       <button onclick="searchWebsite()">Cari</button>
-   </div>
 </header>
 
 <main class="content">
@@ -136,6 +138,7 @@ function searchWebsite(){
 
 </body>
 </html>
+
 
 
 
