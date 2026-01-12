@@ -2,8 +2,18 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+
+    <title>Order & Pembayaran SAMP Store - Jasa SA-MP</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Form order dan pembayaran layanan SAMP Store untuk jasa scripting Pawn, mapping SA-MP, textdraw, dan fix bug gamemode.">
+    <meta name="keywords" content="Order SAMP Store, Pembayaran SA-MP, Jasa SA-MP, Script SA-MP, Mapping SA-MP">
+    <meta name="author" content="SAMP Store">
+    <meta name="robots" content="index, follow">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA-MP - Payments</title>
+
+    <link rel="canonical" href="https://sampstore.my.id/payments.html">
 
     <style>
         body {
@@ -25,9 +35,10 @@
             backdrop-filter: blur(10px);
         }
 
-        .form-container h2 {
+        .form-container h1 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 22px;
         }
 
         label {
@@ -84,41 +95,47 @@
         .btn-kembali:hover {
             background: #0d6cd6;
         }
-
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Form Pembayaran & Order</h2>
+<main>
 
-        <label>Nama</label>
-        <input type="text" id="nama" placeholder="Masukkan nama kamu">
+<div class="form-container">
 
-        <label>Email</label>
-        <input type="email" id="email" placeholder="Masukkan email kamu">
+    <h1>Form Order & Pembayaran SAMP Store</h1>
 
-        <label>Pilih Layanan</label>
-        <select id="layanan">
-            <option value="Scripting Pawn">Scripting Pawn</option>
-            <option value="Mapping">Mapping</option>
-            <option value="Textdraw">Textdraw</option>
-            <option value="Fix Bug">Fix Bug</option>
-        </select>
+    <label>Nama</label>
+    <input type="text" id="nama" placeholder="Masukkan nama kamu">
 
-        <label>Upload Foto (Opsional)</label>
-        <input type="file" id="foto" accept="image/*" onchange="previewFoto()">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Masukkan email kamu">
 
-        <img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:8px;">
+    <label>Pilih Layanan</label>
+    <select id="layanan">
+        <option value="Scripting Pawn">Scripting Pawn</option>
+        <option value="Mapping">Mapping SA-MP</option>
+        <option value="Textdraw">Textdraw SA-MP</option>
+        <option value="Fix Bug">Fix Bug Gamemode</option>
+    </select>
 
-        <label>Deskripsi Order</label>
-        <textarea id="deskripsi" placeholder="Tulis orderan kamu secara detail..."></textarea>
+    <label>Upload Foto (Opsional)</label>
+    <input type="file" id="foto" accept="image/*" onchange="previewFoto()">
 
-        <button onclick="kirimData()">Kirim Order</button>
-        <a href="index.html" class="btn-kembali">Kembali</a>
-    </div>
+    <img id="preview" alt="Preview Order" style="display:none; width:100%; margin-top:10px; border-radius:8px;">
+
+    <label>Deskripsi Order</label>
+    <textarea id="deskripsi" placeholder="Tulis orderan kamu secara detail..."></textarea>
+
+    <button onclick="kirimData()">Kirim Order</button>
+    <a href="index.html" class="btn-kembali">Kembali ke Beranda</a>
+
+</div>
+
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
 emailjs.init({
     publicKey: "wVNA4b9j45kVeS3yb"
@@ -188,7 +205,7 @@ async function kirimData() {
 
     let phone = "6283803770518";
     let message =
-        "📌 *Order Baru*\n\n" +
+        "📌 *Order Baru dari Website SAMP Store*\n\n" +
         "👤 Nama: " + nama + "\n" +
         "📧 Email: " + email + "\n" +
         "🛒 Layanan: " + layanan + "\n" +
@@ -203,5 +220,6 @@ async function kirimData() {
     }, 1500);
 }
 </script>
+
 </body>
 </html>
