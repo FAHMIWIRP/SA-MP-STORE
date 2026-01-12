@@ -113,9 +113,29 @@ function toggleSound() {
         isPlaying = true;
     }
 }
+function searchWebsite(){
+  let k = document.getElementById("searchInput").value.toLowerCase();
+
+  if(k.includes("script")){
+    location.href = "menu.html#scripting";
+  }
+  else if(k.includes("map")){
+    location.href = "menu.html#mapping";
+  }
+  else if(k.includes("text")){
+    location.href = "menu.html#textdraw";
+  }
+  else if(k.includes("fix") || k.includes("bug")){
+    location.href = "menu.html#fixbug";
+  }
+  else{
+    alert("Layanan tidak ditemukan.");
+  }
+}   
 </script>
 
 </body>
 </html>
+
 
 
