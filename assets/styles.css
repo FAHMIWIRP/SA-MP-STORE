@@ -234,4 +234,14 @@ body {
     transform: scale(0.95);
 
 }
+@media(max-width: 768px){
+    .nav-link{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .search-box input{
+        width: 140px;
+    }
+}
 
