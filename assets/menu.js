@@ -11,3 +11,14 @@ document.querySelectorAll(".product-card img").forEach(img => {
 function closeModal() {
     modal.style.display = "none";
 }
+const params = new URLSearchParams(window.location.search);
+const keyword = params.get("q");
+
+if(keyword){
+ const bodyText = document.body.innerHTML;
+ const reg = new RegExp(`(${keyword})`, "gi");
+
+ document.body.innerHTML = bodyText.replace(reg,
+   `<span class="text-highlight">$1</span>`
+ );
+}
