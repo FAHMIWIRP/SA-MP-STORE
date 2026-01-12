@@ -36,8 +36,8 @@
         <a href="contact.html">Kontak</a>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Cari layanan...">
-            <button onclick="searchWebsite()">Cari</button>
+         <input type="text" id="searchInput" placeholder="Cari di website..." oninput="liveSearch()">
+         <div id="searchResults" class="search-results"></div>
         </div>
     </nav>
 </header>
@@ -115,29 +115,51 @@ function toggleSound() {
         isPlaying = true;
     }
 }
-function searchWebsite(){
-  let k = document.getElementById("searchInput").value.toLowerCase();
+    
+const websiteIndex = [
+  { title:"Tentang Fahmi", keyword:"fahmi developer profesional", page:"about.html" },
+  { title:"Owner SA-MP", keyword:"owner samp fahmi", page:"about.html" },
+  { title:"Scripting Pawn", keyword:"scripting pawn samp coding", page:"menu.html" },
+  { title:"Mapping SA-MP", keyword:"mapping interior exterior", page:"menu.html" },
+  { title:"Textdraw SA-MP", keyword:"textdraw ui samp", page:"menu.html" },
+  { title:"Fix Bug", keyword:"fix bug error crash", page:"menu.html" },
+  { title:"Kontak Owner", keyword:"kontak whatsapp email", page:"contact.html" },
+  { title:"Order Layanan", keyword:"order pembayaran jasa", page:"payments.html" },
+];
 
-  if(k.includes("script")){
-    location.href = "menu.html#scripting";
+function liveSearch(){
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const resultsBox = document.getElementById("searchResults");
+
+  resultsBox.innerHTML = "";
+
+  if(input.length < 2){
+    resultsBox.style.display = "none";
+    return;
   }
-  else if(k.includes("map")){
-    location.href = "menu.html#mapping";
+
+  let results = websiteIndex.filter(item =>
+    item.keyword.includes(input) || item.title.toLowerCase().includes(input)
+  );
+
+  if(results.length === 0){
+    resultsBox.innerHTML = "<div>Tidak ditemukan hasil</div>";
+  } else {
+    results.forEach(item=>{
+      let div = document.createElement("div");
+      div.textContent = item.title;
+      div.onclick = ()=> window.location.href = item.page;
+      resultsBox.appendChild(div);
+    });
   }
-  else if(k.includes("text")){
-    location.href = "menu.html#textdraw";
-  }
-  else if(k.includes("fix") || k.includes("bug")){
-    location.href = "menu.html#fixbug";
-  }
-  else{
-    alert("Layanan tidak ditemukan.");
-  }
-}   
+
+  resultsBox.style.display = "block";
+}
 </script>
 
 </body>
 </html>
+
 
 
 
