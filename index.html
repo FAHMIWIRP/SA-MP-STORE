@@ -34,13 +34,11 @@
         <a href="menu.html">Menu</a>
         <a href="about.html">About</a>
         <a href="contact.html">Kontak</a>
-
-        <div class="ai-search-box">
-  <input type="text" id="aiSearch" placeholder="Cari layanan, nama, kata apapun...">
-  <button onclick="startVoice()">🎤</button>
-</div>
-
-<div id="searchResult"></div>
+        <div class="search-box">
+         <input type="text" id="searchInput" placeholder="Cari apa saja di website..."
+         oninput="aiSearch()" onkeydown="searchKey(event)">
+        <div id="searchResults" class="search-results"></div>
+        </div>
     </nav>
 </header>
 
@@ -119,20 +117,55 @@ function toggleSound() {
 }
     
 const aiDatabase = [
- {title:"Tentang Fahmi",desc:"Profil owner dan developer SA-MP profesional",content:"fahmi owner developer profesional",page:"about.html"},
- {title:"Scripting Pawn",desc:"Pembuatan dan perbaikan script SA-MP",content:"scripting pawn fitur coding",page:"menu.html"},
- {title:"Mapping SA-MP",desc:"Mapping interior dan exterior server",content:"mapping interior exterior map",page:"menu.html"},
- {title:"Textdraw SA-MP",desc:"UI textdraw modern",content:"textdraw ui design",page:"menu.html"},
- {title:"Fix Bug",desc:"Perbaikan bug crash error warning",content:"fix bug error crash",page:"menu.html"},
- {title:"Kontak Owner",desc:"WhatsApp, Email, Instagram",content:"kontak whatsapp email instagram",page:"contact.html"},
- {title:"Order Layanan",desc:"Form order dan pembayaran jasa",content:"order pembayaran form",page:"payments.html"}
+ {
+  title:"Tentang Fahmi",
+  desc:"Profil owner dan developer SA-MP profesional",
+  content:"fahmi owner developer profesional samp",
+  page:"about.html"
+ },
+ {
+  title:"Scripting Pawn",
+  desc:"Pembuatan dan perbaikan script SA-MP",
+  content:"scripting pawn coding fitur samp",
+  page:"menu.html"
+ },
+ {
+  title:"Mapping SA-MP",
+  desc:"Mapping interior dan exterior server",
+  content:"mapping interior exterior map",
+  page:"menu.html"
+ },
+ {
+  title:"Textdraw SA-MP",
+  desc:"UI textdraw modern",
+  content:"textdraw ui design tampilan",
+  page:"menu.html"
+ },
+ {
+  title:"Fix Bug",
+  desc:"Perbaikan bug crash warning error",
+  content:"fix bug crash error warning",
+  page:"menu.html"
+ },
+ {
+  title:"Kontak Owner",
+  desc:"WhatsApp, Email, Instagram",
+  content:"kontak whatsapp email instagram",
+  page:"contact.html"
+ },
+ {
+  title:"Order Layanan",
+  desc:"Form order dan pembayaran jasa",
+  content:"order pembayaran form jasa",
+  page:"payments.html"
+ }
 ];
 
-let activeIndex=-1;
+let activeIndex = -1;
 
 function aiSearch(){
- const input=document.getElementById("searchInput").value.toLowerCase();
- const box=document.getElementById("searchResults");
+ const input = document.getElementById("searchInput").value.toLowerCase();
+ const box = document.getElementById("searchResults");
  box.innerHTML="";
  activeIndex=-1;
 
@@ -141,65 +174,70 @@ function aiSearch(){
   return;
  }
 
- let words=input.split(" ");
- let results=aiDatabase.map(item=>{
-  let score=0;
-  words.forEach(w=>{
-    if(item.content.includes(w)) score+=3;
-    if(item.title.toLowerCase().includes(w)) score+=5;
-    if(item.desc.toLowerCase().includes(w)) score+=2;
-  });
-  return {...item,score};
- }).filter(i=>i.score>0).sort((a,b)=>b.score-a.score);
+ let keywords = input.split(" ");
+
+ let results = aiDatabase.map(item=>{
+   let score=0;
+   keywords.forEach(word=>{
+     if(item.content.includes(word)) score+=3;
+     if(item.title.toLowerCase().includes(word)) score+=5;
+     if(item.desc.toLowerCase().includes(word)) score+=2;
+   });
+   return {...item,score};
+ }).filter(item=>item.score>0);
+
+ results.sort((a,b)=>b.score-a.score);
 
  if(results.length===0){
-  box.innerHTML=`<div class="search-item">AI tidak menemukan hasil</div>`;
- }else{
+  box.innerHTML=`<div class="search-item">AI tidak menemukan hasil relevan</div>`;
+ } else {
   results.forEach(item=>{
    box.innerHTML+=`
-    <div class="search-item" onclick="goPage('${item.page}')">
-      <div class="search-title">${item.title}</div>
-      <div class="search-desc">${item.desc}</div>
-    </div>`;
+   <div class="search-item" onclick="goPage('${item.page}')">
+     <div class="search-title">${highlight(item.title,input)}</div>
+     <div class="search-desc">${highlight(item.desc,input)}</div>
+   </div>`;
   });
  }
+
  box.style.display="block";
 }
 
-function goPage(p){window.location.href=p;}
+function highlight(text,input){
+ let words=input.split(" ");
+ words.forEach(w=>{
+  let r=new RegExp(`(${w})`,"gi");
+  text=text.replace(r,`<span class="highlight">$1</span>`);
+ });
+ return text;
+}
+
+function goPage(p){
+ window.location.href=p;
+}
 
 function searchKey(e){
  const items=document.querySelectorAll(".search-item");
- if(e.key==="ArrowDown"){activeIndex++; if(activeIndex>=items.length) activeIndex=0;}
- if(e.key==="ArrowUp"){activeIndex--; if(activeIndex<0) activeIndex=items.length-1;}
- if(e.key==="Enter" && activeIndex>=0){items[activeIndex].click();}
- items.forEach(i=>i.classList.remove("active"));
- if(items[activeIndex]) items[activeIndex].classList.add("active");
-}
-    
-function startVoice(){
- if(!('webkitSpeechRecognition' in window)){
-   alert("Browser tidak mendukung voice search");
-   return;
+
+ if(e.key==="ArrowDown"){
+  activeIndex++;
+  if(activeIndex>=items.length) activeIndex=0;
+ }
+ if(e.key==="ArrowUp"){
+  activeIndex--;
+  if(activeIndex<0) activeIndex=items.length-1;
+ }
+ if(e.key==="Enter" && activeIndex>=0){
+  items[activeIndex].click();
  }
 
- const rec = new webkitSpeechRecognition();
- rec.lang="id-ID";
- rec.start();
-
- rec.onresult=function(e){
-   const text=e.results[0][0].transcript;
-   document.getElementById("searchInput").value=text;
-   aiSearch();
- };
-
- rec.onerror=function(){
-   alert("Voice gagal, coba lagi");
- };
+ items.forEach(i=>i.classList.remove("active"));
+ if(items[activeIndex]) items[activeIndex].classList.add("active");
 }
 </script>
 </body>
 </html>
+
 
 
 
