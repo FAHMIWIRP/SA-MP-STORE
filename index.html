@@ -190,18 +190,57 @@ function aiSearch(){
 
  if(results.length===0){
   box.innerHTML=`<div class="search-item">AI tidak menemukan hasil relevan</div>`;
+const aiDatabase = [
+ {title:"Tentang Fahmi",desc:"Profil owner dan developer SA-MP profesional",content:"fahmi owner developer profesional samp",page:"about.html"},
+ {title:"Scripting Pawn",desc:"Pembuatan dan perbaikan script SA-MP",content:"scripting pawn coding fitur samp",page:"menu.html"},
+ {title:"Mapping SA-MP",desc:"Mapping interior dan exterior server",content:"mapping interior exterior map",page:"menu.html"},
+ {title:"Textdraw SA-MP",desc:"UI textdraw modern",content:"textdraw ui design tampilan",page:"menu.html"},
+ {title:"Fix Bug",desc:"Perbaikan bug crash warning error",content:"fix bug crash error warning",page:"menu.html"},
+ {title:"Kontak Owner",desc:"WhatsApp, Email, Instagram",content:"kontak whatsapp email instagram",page:"contact.html"},
+ {title:"Order Layanan",desc:"Form order dan pembayaran jasa",content:"order pembayaran form jasa",page:"payments.html"}
+];
+
+let activeIndex=-1;
+
+function aiSearch(){
+ const input=document.getElementById("searchInput").value.toLowerCase();
+ const box=document.getElementById("searchResults");
+ box.innerHTML="";
+ activeIndex=-1;
+
+ if(input.length<2){
+  box.style.display="none";
+  return;
+ }
+
+ let words=input.split(" ");
+
+ let results=aiDatabase.map(item=>{
+  let score=0;
+  words.forEach(w=>{
+   if(item.content.includes(w)) score+=3;
+   if(item.title.toLowerCase().includes(w)) score+=5;
+   if(item.desc.toLowerCase().includes(w)) score+=2;
+  });
+  return {...item,score};
+ }).filter(i=>i.score>0);
+
+ results.sort((a,b)=>b.score-a.score);
+
+ if(results.length===0){
+  box.innerHTML=`<div class="search-item">Tidak ditemukan</div>`;
  } else {
   results.forEach(r=>{
- const reg = new RegExp(keyword,"gi");
- const title = r.title.replace(reg, m=>`<span class='highlight'>${m}</span>`);
- const desc = r.desc.replace(reg, m=>`<span class='highlight'>${m}</span>`);
- resultsBox.innerHTML += `
-   <div class="search-item" onclick="location.href='${r.url}?q=${encodeURIComponent(keyword)}'">
+   const title=highlight(r.title,input);
+   const desc=highlight(r.desc,input);
+
+   box.innerHTML+=`
+    <div class="search-item" onclick="location.href='${r.page}?q=${encodeURIComponent(input)}'">
      <div class="search-title">${title}</div>
      <div class="search-desc">${desc}</div>
-   </div>
- `;
-});
+    </div>
+   `;
+  });
  }
 
  box.style.display="block";
@@ -216,42 +255,29 @@ function highlight(text,input){
  return text;
 }
 
-function goPage(p){
- window.location.href=p;
-}
-
 function searchKey(e){
  const items=document.querySelectorAll(".search-item");
 
- if(e.key==="ArrowDown"){
-  activeIndex++;
-  if(activeIndex>=items.length) activeIndex=0;
- }
- if(e.key==="ArrowUp"){
-  activeIndex--;
-  if(activeIndex<0) activeIndex=items.length-1;
- }
- if(e.key==="Enter" && activeIndex>=0){
-  items[activeIndex].click();
- }
+ if(e.key==="ArrowDown"){activeIndex++; if(activeIndex>=items.length) activeIndex=0;}
+ if(e.key==="ArrowUp"){activeIndex--; if(activeIndex<0) activeIndex=items.length-1;}
+ if(e.key==="Enter" && activeIndex>=0){items[activeIndex].click();}
 
  items.forEach(i=>i.classList.remove("active"));
  if(items[activeIndex]) items[activeIndex].classList.add("active");
 }
-const params = new URLSearchParams(window.location.search);
-const keyword = params.get("q");
+const params=new URLSearchParams(window.location.search);
+const keyword=params.get("q");
 
 if(keyword){
- const bodyText = document.body.innerHTML;
- const reg = new RegExp(`(${keyword})`, "gi");
-
- document.body.innerHTML = bodyText.replace(reg,
-   `<span class="text-highlight">$1</span>`
+ document.body.innerHTML=document.body.innerHTML.replace(
+  new RegExp(`(${keyword})`,"gi"),
+  `<span class="text-highlight">$1</span>`
  );
-}    
+}
 </script>
 </body>
 </html>
+
 
 
 
