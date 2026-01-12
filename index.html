@@ -36,8 +36,8 @@
         <a href="contact.html">Kontak</a>
 
         <div class="search-box">
-         <input type="text" id="searchInput" placeholder="Cari di website..." 
-         oninput="proSearch()" onkeydown="searchKey(event)">
+         <input type="text" id="searchInput" placeholder="Cari apa saja di website..."
+         oninput="aiSearch()" onkeydown="searchKey(event)">
          <div id="searchResults" class="search-results"></div>
         </div>
     </nav>
@@ -117,62 +117,108 @@ function toggleSound() {
     }
 }
     
-const siteData = [
- {title:"Tentang Fahmi", desc:"Profil owner dan developer SA-MP profesional", key:"fahmi owner developer profesional", page:"about.html"},
- {title:"Scripting Pawn", desc:"Pembuatan dan perbaikan script SA-MP", key:"scripting pawn coding", page:"menu.html"},
- {title:"Mapping SA-MP", desc:"Mapping interior exterior server", key:"mapping interior exterior", page:"menu.html"},
- {title:"Textdraw SA-MP", desc:"UI textdraw modern SA-MP", key:"textdraw ui design", page:"menu.html"},
- {title:"Fix Bug", desc:"Perbaikan bug crash warning", key:"fix bug error crash", page:"menu.html"},
- {title:"Kontak Owner", desc:"WhatsApp, Email, Instagram", key:"kontak whatsapp email", page:"contact.html"},
- {title:"Order Layanan", desc:"Form order dan pembayaran jasa", key:"order pembayaran jasa", page:"payments.html"},
+const aiDatabase = [
+ {
+  title:"Tentang Fahmi",
+  desc:"Profil owner dan developer SA-MP profesional",
+  content:"fahmi owner developer profesional samp",
+  page:"about.html"
+ },
+ {
+  title:"Scripting Pawn",
+  desc:"Pembuatan dan perbaikan script SA-MP",
+  content:"scripting pawn coding fitur samp",
+  page:"menu.html"
+ },
+ {
+  title:"Mapping SA-MP",
+  desc:"Mapping interior dan exterior server",
+  content:"mapping interior exterior map",
+  page:"menu.html"
+ },
+ {
+  title:"Textdraw SA-MP",
+  desc:"UI textdraw modern",
+  content:"textdraw ui design tampilan",
+  page:"menu.html"
+ },
+ {
+  title:"Fix Bug",
+  desc:"Perbaikan bug crash warning error",
+  content:"fix bug crash error warning",
+  page:"menu.html"
+ },
+ {
+  title:"Kontak Owner",
+  desc:"WhatsApp, Email, Instagram",
+  content:"kontak whatsapp email instagram",
+  page:"contact.html"
+ },
+ {
+  title:"Order Layanan",
+  desc:"Form order dan pembayaran jasa",
+  content:"order pembayaran form jasa",
+  page:"payments.html"
+ }
 ];
 
 let activeIndex = -1;
 
-function proSearch(){
+function aiSearch(){
  const input = document.getElementById("searchInput").value.toLowerCase();
  const box = document.getElementById("searchResults");
- box.innerHTML = "";
- activeIndex = -1;
+ box.innerHTML="";
+ activeIndex=-1;
 
- if(input.length < 2){
-  box.style.display = "none";
+ if(input.length<2){
+  box.style.display="none";
   return;
  }
 
- let results = siteData.filter(item =>
-   item.key.includes(input) || item.title.toLowerCase().includes(input)
- );
+ let keywords = input.split(" ");
 
- if(results.length === 0){
-   box.innerHTML = `<div class="search-item">Tidak ditemukan hasil</div>`;
- } else {
-   results.forEach((item,i)=>{
-     let title = highlight(item.title,input);
-     let desc = highlight(item.desc,input);
-
-     box.innerHTML += `
-      <div class="search-item" onclick="goPage('${item.page}')">
-        <div class="search-title">${title}</div>
-        <div class="search-desc">${desc}</div>
-      </div>`;
+ let results = aiDatabase.map(item=>{
+   let score=0;
+   keywords.forEach(word=>{
+     if(item.content.includes(word)) score+=3;
+     if(item.title.toLowerCase().includes(word)) score+=5;
+     if(item.desc.toLowerCase().includes(word)) score+=2;
    });
+   return {...item,score};
+ }).filter(item=>item.score>0);
+
+ results.sort((a,b)=>b.score-a.score);
+
+ if(results.length===0){
+  box.innerHTML=`<div class="search-item">AI tidak menemukan hasil relevan</div>`;
+ } else {
+  results.forEach(item=>{
+   box.innerHTML+=`
+   <div class="search-item" onclick="goPage('${item.page}')">
+     <div class="search-title">${highlight(item.title,input)}</div>
+     <div class="search-desc">${highlight(item.desc,input)}</div>
+   </div>`;
+  });
  }
 
- box.style.display = "block";
+ box.style.display="block";
 }
 
-function highlight(text, key){
- let regex = new RegExp(`(${key})`,"gi");
- return text.replace(regex, `<span class="highlight">$1</span>`);
+function highlight(text,input){
+ let words=input.split(" ");
+ words.forEach(w=>{
+  let r=new RegExp(`(${w})`,"gi");
+  text=text.replace(r,`<span class="highlight">$1</span>`);
+ });
+ return text;
 }
 
-function goPage(page){
- window.location.href = page;
+function goPage(p){
+ window.location.href=p;
 }
 
 function searchKey(e){
- const items = document.querySelectorAll(".search-item");
+ const items=document.querySelectorAll(".search-item");
 
  if(e.key==="ArrowDown"){
   activeIndex++;
@@ -192,6 +238,7 @@ function searchKey(e){
 </script>
 </body>
 </html>
+
 
 
 
