@@ -35,11 +35,12 @@
         <a href="about.html">About</a>
         <a href="contact.html">Kontak</a>
 
-        <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Cari apa saja di website..."
-         oninput="aiSearch()" onkeydown="searchKey(event)">
-  <div id="searchResults" class="search-results"></div>
-        </div>
+        <div class="ai-search-box">
+  <input type="text" id="aiSearch" placeholder="Cari layanan, nama, kata apapun...">
+  <button onclick="startVoice()">🎤</button>
+</div>
+
+<div id="searchResult"></div>
     </nav>
 </header>
 
@@ -199,6 +200,7 @@ function startVoice(){
 </script>
 </body>
 </html>
+
 
 
 
