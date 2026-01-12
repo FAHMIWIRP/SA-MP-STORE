@@ -54,26 +54,59 @@ body {
 /* SEARCH BOX */
 .search-box {
     position: relative;
+    display: flex;
+    background: rgba(255,255,255,0.08);
+    border-radius: 30px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    transition: 0.3s ease;
 }
 
+.search-box:focus-within {
+    border-color: #1e88ff;
+    box-shadow: 0 0 12px rgba(30,136,255,0.6);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px 4px;
+    width: 240px;
+    font-size: 14px;
+}
+
+.search-box input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+/* RESULT */
 .search-results {
     position: absolute;
-    top: 45px;
+    top: 55px;
     left: 0;
     width: 100%;
-    background: #061226;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    background: linear-gradient(180deg, #061226, #091c3f);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7);
     overflow: hidden;
     display: none;
     z-index: 9999;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(6px);}
+    to {opacity:1; transform:translateY(0);}
 }
 
 .search-item {
-    padding: 12px 15px;
+    padding: 14px 16px;
     cursor: pointer;
     color: white;
-    transition: 0.2s;
+    transition: 0.25s;
     border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -81,9 +114,8 @@ body {
     border-bottom: none;
 }
 
-.search-item:hover,
-.search-item.active {
-    background: #1e88ff;
+.search-item:hover {
+    background: linear-gradient(90deg, #1e88ff, #0d6cd6);
 }
 
 .search-title {
@@ -93,26 +125,12 @@ body {
 
 .search-desc {
     font-size: 12px;
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 .highlight {
     color: #ffd54f;
     font-weight: bold;
-}
-.mic-btn{
-  background:#1e88ff;
-  border:none;
-  border-radius:8px;
-  color:white;
-  padding:8px 12px;
-  cursor:pointer;
-  font-size:16px;
-  transition:0.3s;
-}
-.mic-btn:hover{
-  background:#0d6cd6;
-  transform:scale(1.1);
 }
 .bg-video {
     position: absolute;
@@ -275,6 +293,7 @@ body {
         width: 140px;
     }
 }
+
 
 
 
