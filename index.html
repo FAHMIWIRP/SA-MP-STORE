@@ -36,7 +36,8 @@
         <a href="contact.html">Kontak</a>
 
         <div class="search-box">
-         <input type="text" id="searchInput" placeholder="Cari di website..." oninput="liveSearch()">
+         <input type="text" id="searchInput" placeholder="Cari di website..." 
+         oninput="proSearch()" onkeydown="searchKey(event)">
          <div id="searchResults" class="search-results"></div>
         </div>
     </nav>
@@ -116,49 +117,82 @@ function toggleSound() {
     }
 }
     
-const websiteIndex = [
-  { title:"Tentang Fahmi", keyword:"fahmi developer profesional", page:"about.html" },
-  { title:"Owner SA-MP", keyword:"owner samp fahmi", page:"about.html" },
-  { title:"Scripting Pawn", keyword:"scripting pawn samp coding", page:"menu.html" },
-  { title:"Mapping SA-MP", keyword:"mapping interior exterior", page:"menu.html" },
-  { title:"Textdraw SA-MP", keyword:"textdraw ui samp", page:"menu.html" },
-  { title:"Fix Bug", keyword:"fix bug error crash", page:"menu.html" },
-  { title:"Kontak Owner", keyword:"kontak whatsapp email", page:"contact.html" },
-  { title:"Order Layanan", keyword:"order pembayaran jasa", page:"payments.html" },
+const siteData = [
+ {title:"Tentang Fahmi", desc:"Profil owner dan developer SA-MP profesional", key:"fahmi owner developer profesional", page:"about.html"},
+ {title:"Scripting Pawn", desc:"Pembuatan dan perbaikan script SA-MP", key:"scripting pawn coding", page:"menu.html"},
+ {title:"Mapping SA-MP", desc:"Mapping interior exterior server", key:"mapping interior exterior", page:"menu.html"},
+ {title:"Textdraw SA-MP", desc:"UI textdraw modern SA-MP", key:"textdraw ui design", page:"menu.html"},
+ {title:"Fix Bug", desc:"Perbaikan bug crash warning", key:"fix bug error crash", page:"menu.html"},
+ {title:"Kontak Owner", desc:"WhatsApp, Email, Instagram", key:"kontak whatsapp email", page:"contact.html"},
+ {title:"Order Layanan", desc:"Form order dan pembayaran jasa", key:"order pembayaran jasa", page:"payments.html"},
 ];
 
-function liveSearch(){
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const resultsBox = document.getElementById("searchResults");
+let activeIndex = -1;
 
-  resultsBox.innerHTML = "";
+function proSearch(){
+ const input = document.getElementById("searchInput").value.toLowerCase();
+ const box = document.getElementById("searchResults");
+ box.innerHTML = "";
+ activeIndex = -1;
 
-  if(input.length < 2){
-    resultsBox.style.display = "none";
-    return;
-  }
+ if(input.length < 2){
+  box.style.display = "none";
+  return;
+ }
 
-  let results = websiteIndex.filter(item =>
-    item.keyword.includes(input) || item.title.toLowerCase().includes(input)
-  );
+ let results = siteData.filter(item =>
+   item.key.includes(input) || item.title.toLowerCase().includes(input)
+ );
 
-  if(results.length === 0){
-    resultsBox.innerHTML = "<div>Tidak ditemukan hasil</div>";
-  } else {
-    results.forEach(item=>{
-      let div = document.createElement("div");
-      div.textContent = item.title;
-      div.onclick = ()=> window.location.href = item.page;
-      resultsBox.appendChild(div);
-    });
-  }
+ if(results.length === 0){
+   box.innerHTML = `<div class="search-item">Tidak ditemukan hasil</div>`;
+ } else {
+   results.forEach((item,i)=>{
+     let title = highlight(item.title,input);
+     let desc = highlight(item.desc,input);
 
-  resultsBox.style.display = "block";
+     box.innerHTML += `
+      <div class="search-item" onclick="goPage('${item.page}')">
+        <div class="search-title">${title}</div>
+        <div class="search-desc">${desc}</div>
+      </div>`;
+   });
+ }
+
+ box.style.display = "block";
+}
+
+function highlight(text, key){
+ let regex = new RegExp(`(${key})`,"gi");
+ return text.replace(regex, `<span class="highlight">$1</span>`);
+}
+
+function goPage(page){
+ window.location.href = page;
+}
+
+function searchKey(e){
+ const items = document.querySelectorAll(".search-item");
+
+ if(e.key==="ArrowDown"){
+  activeIndex++;
+  if(activeIndex>=items.length) activeIndex=0;
+ }
+ if(e.key==="ArrowUp"){
+  activeIndex--;
+  if(activeIndex<0) activeIndex=items.length-1;
+ }
+ if(e.key==="Enter" && activeIndex>=0){
+  items[activeIndex].click();
+ }
+
+ items.forEach(i=>i.classList.remove("active"));
+ if(items[activeIndex]) items[activeIndex].classList.add("active");
 }
 </script>
-
 </body>
 </html>
+
 
 
 
