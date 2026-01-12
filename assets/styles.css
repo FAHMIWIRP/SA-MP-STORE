@@ -188,8 +188,27 @@ body {
     box-shadow: 0 0 10px #1e88ff;
     transform: scale(1.05);
 }
+.search-box {
+  display: flex;
+  gap: 8px;
+}
 
-/* Saat ditekan */
+.search-box input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  width: 200px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #1e88ff;
+  color: white;
+  cursor: pointer;
+}
 .sound-btn:active {
     transform: scale(0.95);
+
 }
