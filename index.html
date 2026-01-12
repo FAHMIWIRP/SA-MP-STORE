@@ -1,92 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
+    <title>SAMP Store - Jasa Pengembangan Server SA-MP</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="SAMP Store menyediakan jasa pengembangan server SA-MP, script, mapping, dan layanan profesional. Kunjungi website resmi kami sekarang.">
+    <meta name="keywords" content="SAMP Store, SA-MP, Jasa SA-MP, Script SA-MP, Mapping SA-MP, Server SA-MP">
+    <meta name="author" content="SAMP Store">
+    <meta name="robots" content="index, follow">
+
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA-MP - Beranda</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://sampstore.my.id/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SAMP Store - Jasa Pengembangan Server SA-MP">
+    <meta property="og:description" content="Website resmi jasa pengembangan server SA-MP profesional.">
+    <meta property="og:url" content="https://sampstore.my.id/">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="nav-logo">SA-MP - Beranda</div>
-        <nav class="nav-link">
-            <a href="index.html" class="active">Beranda</a>
-            <a href="menu.html">Menu</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Kontak Owner</a>
-        </nav>
-    </header>
-    <div class="content">
+
+<header class="navbar">
+    <div class="nav-logo">SAMP Store</div>
+    <nav class="nav-link">
+        <a href="index.html" class="active">Beranda</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Kontak Owner</a>
+    </nav>
+</header>
+
+<main class="content">
+
     <video autoplay loop muted playsinline class="bg-video">
         <source src="assets/videos/bg-video.mp4" type="video/mp4">
     </video>
 
-    <h1>Selamat Datang</h1>
-    <p>
-        Saya Sebagai Owner menyediakan layanan Jasa untuk mempermudah anda dalam
-        Mengembangkan Server. Maka Dari itu saya membuat sebuah website dimana kalian dapat membuat orderan
-        Dan Melihat Daftar Menu Yang tersedia...
-    </p>
-    <a href="menu.html">Daftar Menu</a>
-</div>
-    </div>
+    <h1>SAMP Store - Jasa Pengembangan Server SA-MP</h1>
 
-    <footer class="footer">
+    <p>
+        SAMP Store adalah website resmi yang menyediakan jasa profesional untuk membantu anda
+        mengembangkan server SA-MP. Kami menyediakan layanan script, mapping, sistem roleplay,
+        dan berbagai kebutuhan server lainnya.
+    </p>
+
+    <a href="menu.html">Lihat Daftar Menu</a>
+
+</main>
+
+<footer class="footer">
+
     <h3>Supported By</h3>
 
     <div class="support-logos">
         <div class="logo-box">
-            <img src="assets/images/chatgpt.jpg" alt="ChatGPT">
+            <img src="assets/images/chatgpt.jpg" alt="ChatGPT AI Support">
         </div>
         <div class="logo-box">
-            <img src="assets/images/axisnet.jpg" alt="Axisnet">
+            <img src="assets/images/axisnet.jpg" alt="Axisnet Hosting">
         </div>
         <div class="logo-box">
             <img src="assets/images/emyu.jpg" alt="United Apps">
         </div>
         <div class="logo-box">
-            <img src="assets/images/samplogo.jpg" alt="SA-MP">
+            <img src="assets/images/samplogo.jpg" alt="SA-MP Logo">
         </div>
     </div>
 
-    <p class="footer-text">© 2025 — All Rights Reserved</p>
-    </footer>
-    
-    <button id="sound-btn" class="sound-btn">🔇 OFF</button>
-    
-    <audio id="bgm" loop>
-        <source src="assets/audios/instrumen.mp3" type="audio/mp3">
-    </audio>
-    
-    <script>
-    let audio = document.getElementById("bgm");
-    let btn = document.getElementById("sound-btn");
-    let isPlaying = false;
-    
-    // Klik tombol ubah ON/OFF
-    btn.addEventListener("click", function () {
+    <p class="footer-text">© 2025 SAMP Store — https://sampstore.my.id</p>
+
+</footer>
+
+<button id="sound-btn" class="sound-btn">🔇 OFF</button>
+
+<audio id="bgm" loop>
+    <source src="assets/audios/instrumen.mp3" type="audio/mp3">
+</audio>
+
+<script>
+let audio = document.getElementById("bgm");
+let btn = document.getElementById("sound-btn");
+let isPlaying = false;
+
+btn.addEventListener("click", function () {
+    toggleSound();
+});
+
+document.addEventListener("click", function () {
+    if (!isPlaying) {
         toggleSound();
-    });
-    
-    // Klik di mana saja audio ON pertama kali
-    document.addEventListener("click", function () {
-        if (!isPlaying) {
-            toggleSound();
-        }
-    }, { once: true });
-    
-    function toggleSound() {
-        if (isPlaying) {
-            audio.pause();
-            btn.textContent = "🔇 OFF";
-            isPlaying = false;
-        } else {
-            audio.play();
-            btn.textContent = "🔊 ON";
-            isPlaying = true;
-        }
     }
-    </script>
+}, { once: true });
+
+function toggleSound() {
+    if (isPlaying) {
+        audio.pause();
+        btn.textContent = "🔇 OFF";
+        isPlaying = false;
+    } else {
+        audio.play();
+        btn.textContent = "🔊 ON";
+        isPlaying = true;
+    }
+}
+</script>
 
 </body>
 </html>
