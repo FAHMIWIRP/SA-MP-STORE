@@ -1,294 +1,287 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>SAMP Store - Jasa Pengembangan Server SA-MP</title>
+<meta charset="UTF-8">
+<title>SAMP Store - Jasa Pengembangan Server SA-MP</title>
 
-    <!-- SEO Meta -->
-    <meta name="description" content="SAMP Store menyediakan jasa pengembangan server SA-MP, script, mapping, dan layanan profesional. Kunjungi website resmi kami sekarang.">
-    <meta name="keywords" content="SAMP Store, SA-MP, Jasa SA-MP, Script SA-MP, Mapping SA-MP, Server SA-MP">
-    <meta name="author" content="SAMP Store">
-    <meta name="robots" content="index, follow">
+<meta name="description" content="SAMP Store menyediakan jasa pengembangan server SA-MP, script, mapping, dan layanan profesional.">
+<meta name="keywords" content="SAMP Store, SA-MP, Jasa SA-MP, Script SA-MP, Mapping SA-MP, Server SA-MP">
+<meta name="author" content="SAMP Store">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://sampstore.my.id/">
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://sampstore.my.id/">
+<meta property="og:title" content="SAMP Store - Jasa Pengembangan Server SA-MP">
+<meta property="og:description" content="Website resmi jasa pengembangan server SA-MP profesional.">
+<meta property="og:url" content="https://sampstore.my.id/">
+<meta property="og:type" content="website">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="SAMP Store - Jasa Pengembangan Server SA-MP">
-    <meta property="og:description" content="Website resmi jasa pengembangan server SA-MP profesional.">
-    <meta property="og:url" content="https://sampstore.my.id/">
-    <meta property="og:type" content="website">
-
-    <link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
 <header class="navbar">
-    <div class="nav-logo">SAMP Store</div>
+  <div class="nav-logo">SAMP Store</div>
 
-    <nav class="nav-link">
-        <a href="index.html">Beranda</a>
-        <a href="menu.html">Menu</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Kontak</a>
-        <div class="search-box">
-        <input type="text" id="searchInput"
-        placeholder="Cari apa saja di website..."
-        oninput="aiSearch()"
-        onkeydown="searchKey(event)">
-        <div id="searchResults" class="search-results"></div>
-        </div>
-    </nav>
+  <nav class="nav-link">
+    <a href="index.html" class="active">Beranda</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Kontak</a>
+    <a href="reglog.html">Admin</a>
+
+    <div class="search-box">
+      <input type="text" id="searchInput"
+       placeholder="Cari layanan, nama, atau kata kunci..."
+       autocomplete="off">
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </nav>
 </header>
 
 <main class="content">
 
-    <video autoplay loop muted playsinline class="bg-video">
-        <source src="assets/videos/bg-video.mp4" type="video/mp4">
-    </video>
+<video autoplay loop muted playsinline class="bg-video">
+  <source src="assets/videos/bg-video.mp4" type="video/mp4">
+</video>
 
-    <h1>SAMP Store - Jasa Pengembangan Server SA-MP</h1>
+<h1>SAMP Store - Jasa Pengembangan Server SA-MP</h1>
 
-    <p>
-        SAMP Store adalah website resmi yang menyediakan jasa profesional untuk membantu anda
-        mengembangkan server SA-MP. Kami menyediakan layanan script, mapping, sistem roleplay,
-        dan berbagai kebutuhan server lainnya.
-    </p>
+<p>
+SAMP Store adalah website resmi yang menyediakan jasa profesional untuk membantu anda
+mengembangkan server SA-MP. Kami menyediakan layanan script, mapping, sistem roleplay,
+dan berbagai kebutuhan server lainnya.
+</p>
 
-    <a href="menu.html">Lihat Daftar Menu</a>
+<a href="menu.html">Lihat Daftar Menu</a>
 
 </main>
 
 <footer class="footer">
 
-    <h3>Supported By</h3>
+<h3>Supported By</h3>
 
-    <div class="support-logos">
-        <div class="logo-box">
-            <img src="assets/images/chatgpt.jpg" alt="ChatGPT AI Support">
-        </div>
-        <div class="logo-box">
-            <img src="assets/images/axisnet.jpg" alt="Axisnet Hosting">
-        </div>
-        <div class="logo-box">
-            <img src="assets/images/emyu.jpg" alt="United Apps">
-        </div>
-        <div class="logo-box">
-            <img src="assets/images/samplogo.jpg" alt="SA-MP Logo">
-        </div>
-    </div>
+<div class="support-logos">
+  <div class="logo-box"><img src="assets/images/chatgpt.jpg" alt="ChatGPT AI Support"></div>
+  <div class="logo-box"><img src="assets/images/axisnet.jpg" alt="Axisnet Hosting"></div>
+  <div class="logo-box"><img src="assets/images/emyu.jpg" alt="United Apps"></div>
+  <div class="logo-box"><img src="assets/images/samplogo.jpg" alt="SA-MP Logo"></div>
+</div>
 
-    <p class="footer-text">© 2025 SAMP Store — https://sampstore.my.id</p>
+<p class="footer-text">© 2025 SAMP Store — https://sampstore.my.id</p>
 
 </footer>
 
 <button id="sound-btn" class="sound-btn">🔇 OFF</button>
 
 <audio id="bgm" loop>
-    <source src="assets/audios/instrumen.mp3" type="audio/mp3">
+<source src="assets/audios/instrumen.mp3" type="audio/mp3">
 </audio>
 
 <script>
-let audio = document.getElementById("bgm");
-let btn = document.getElementById("sound-btn");
-let isPlaying = false;
+let audio=document.getElementById("bgm");
+let btn=document.getElementById("sound-btn");
+let isPlaying=false;
 
-btn.addEventListener("click", function () {
-    toggleSound();
+btn.onclick=()=>toggleSound();
+
+document.addEventListener("click",()=>{
+ if(!isPlaying) toggleSound();
+},{once:true});
+
+function toggleSound(){
+ if(isPlaying){
+  audio.pause();
+  btn.textContent="🔇 OFF";
+  isPlaying=false;
+ }else{
+  audio.play();
+  btn.textContent="🔊 ON";
+  isPlaying=true;
+ }
+}
+
+// SEARCH ENGINE
+const input=document.getElementById("searchInput");
+const resultsBox=document.getElementById("searchResults");
+
+const pages=[
+ {title:"Scripting Pawn",desc:"Pembuatan script SA-MP profesional",url:"menu.html"},
+ {title:"Mapping SA-MP",desc:"Mapping interior exterior",url:"menu.html"},
+ {title:"Textdraw SA-MP",desc:"UI Textdraw modern",url:"menu.html"},
+ {title:"Fix Bug SA-MP",desc:"Perbaikan bug ringan hingga berat",url:"menu.html"},
+ {title:"Muhammad Fahmi",desc:"Developer dan owner SampStore",url:"about.html"},
+ {title:"Profesional Developer",desc:"Layanan berkualitas tinggi",url:"about.html"},
+ {title:"Payment QRIS",desc:"Pembayaran aman",url:"payments.html"},
+ {title:"Kontak Developer",desc:"Hubungi kami",url:"contact.html"}
+];
+
+input.addEventListener("input",()=>{
+ let keyword=input.value.toLowerCase();
+ resultsBox.innerHTML="";
+ if(keyword.length<2){
+  resultsBox.style.display="none";
+  return;
+ }
+
+ let results=pages.filter(p=>
+  p.title.toLowerCase().includes(keyword) ||
+  p.desc.toLowerCase().includes(keyword)
+ );
+
+ if(results.length===0){
+  resultsBox.innerHTML="<div class='search-item'>Tidak ditemukan</div>";
+ }else{
+  results.forEach(r=>{
+   let reg=new RegExp(keyword,"gi");
+   let title=r.title.replace(reg,m=>`<span class="highlight">${m}</span>`);
+   let desc=r.desc.replace(reg,m=>`<span class="highlight">${m}</span>`);
+
+   resultsBox.innerHTML+=`
+    <div class="search-item" onclick="location.href='${r.url}?q=${encodeURIComponent(keyword)}'">
+    <div class="search-title">${title}</div>
+    <div class="search-desc">${desc}</div>
+   </div>`;
+  });
+ }
+
+ resultsBox.style.display="block";
 });
 
-document.addEventListener("click", function () {
-    if (!isPlaying) {
-        toggleSound();
+document.addEventListener("click",(e)=>{
+ if(!document.querySelector(".search-box").contains(e.target)){
+  resultsBox.style.display="none";
+ }
+});
+
+function escapeReg(text){
+  return text.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+}
+
+function highlightText(keyword){
+  if(!keyword) return;
+
+  keyword = escapeReg(keyword);
+  const regex = new RegExp(keyword,"gi");
+
+  const container = document.querySelector("main"); // hanya highlight isi konten
+  if(!container) return;
+
+  const walker = document.createTreeWalker(
+    container,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
+
+  let node;
+  let firstMatch=null;
+
+  while(node = walker.nextNode()){
+    regex.lastIndex = 0;
+
+    if(regex.test(node.nodeValue)){
+      regex.lastIndex = 0;
+
+      const frag=document.createDocumentFragment();
+      let last=0;
+
+      let match;
+      while((match=regex.exec(node.nodeValue))!==null){
+        const before=node.nodeValue.slice(last,match.index);
+        if(before) frag.appendChild(document.createTextNode(before));
+
+        const mark=document.createElement("span");
+        mark.className="highlight-scroll";
+        mark.textContent=match[0];
+        frag.appendChild(mark);
+
+        if(!firstMatch) firstMatch=mark;
+
+        last=match.index+match[0].length;
+      }
+
+      const after=node.nodeValue.slice(last);
+      if(after) frag.appendChild(document.createTextNode(after));
+
+      node.parentNode.replaceChild(frag,node);
     }
-}, { once: true });
+  }
 
-function toggleSound() {
-    if (isPlaying) {
-        audio.pause();
-        btn.textContent = "🔇 OFF";
-        isPlaying = false;
-    } else {
-        audio.play();
-        btn.textContent = "🔊 ON";
-        isPlaying = true;
+  if(firstMatch){
+    firstMatch.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+}
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const keyword = params.get("q");
+
+  if(!keyword || keyword.length < 2) return;
+
+  const regex = new RegExp(keyword, "gi");
+
+  const walk = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: function(node){
+        // skip empty, script, style, noscript
+        if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if(["SCRIPT","STYLE","NOSCRIPT"].includes(node.parentNode.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    },
+    false
+  );
+
+  let node;
+  let firstMatch = null;
+
+  while(node = walk.nextNode()){
+    const matches = [...node.nodeValue.matchAll(regex)];
+    if(matches.length > 0){
+      const frag = document.createDocumentFragment();
+      let lastIndex = 0;
+
+      matches.forEach(m=>{
+        const start = m.index;
+        const end = start + m[0].length;
+
+        // teks sebelum match
+        if(start > lastIndex){
+          frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex,start)));
+        }
+
+        // buat span highlight
+        const mark = document.createElement("span");
+        mark.className = "highlight-scroll";
+        mark.textContent = node.nodeValue.slice(start,end);
+        frag.appendChild(mark);
+
+        if(!firstMatch) firstMatch = mark;
+
+        lastIndex = end;
+      });
+
+      // sisa teks setelah match
+      if(lastIndex < node.nodeValue.length){
+        frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+      }
+
+      node.parentNode.replaceChild(frag,node);
     }
-}
-    
-const aiDatabase = [
- {
-  title:"Tentang Fahmi",
-  desc:"Profil owner dan developer SA-MP profesional",
-  content:"fahmi owner developer profesional samp",
-  page:"about.html"
- },
- {
-  title:"Scripting Pawn",
-  desc:"Pembuatan dan perbaikan script SA-MP",
-  content:"scripting pawn coding fitur samp",
-  page:"menu.html"
- },
- {
-  title:"Mapping SA-MP",
-  desc:"Mapping interior dan exterior server",
-  content:"mapping interior exterior map",
-  page:"menu.html"
- },
- {
-  title:"Textdraw SA-MP",
-  desc:"UI textdraw modern",
-  content:"textdraw ui design tampilan",
-  page:"menu.html"
- },
- {
-  title:"Fix Bug",
-  desc:"Perbaikan bug crash warning error",
-  content:"fix bug crash error warning",
-  page:"menu.html"
- },
- {
-  title:"Kontak Owner",
-  desc:"WhatsApp, Email, Instagram",
-  content:"kontak whatsapp email instagram",
-  page:"contact.html"
- },
- {
-  title:"Order Layanan",
-  desc:"Form order dan pembayaran jasa",
-  content:"order pembayaran form jasa",
-  page:"payments.html"
- }
-];
+  }
 
-let activeIndex = -1;
+  // scroll ke match pertama
+  if(firstMatch){
+    setTimeout(()=>{
+      firstMatch.scrollIntoView({behavior:"smooth", block:"center"});
+    },300);
+  }
 
-function aiSearch(){
- const input = document.getElementById("searchInput").value.toLowerCase();
- const box = document.getElementById("searchResults");
- box.innerHTML="";
- activeIndex=-1;
+})();
 
- if(input.length<2){
-  box.style.display="none";
-  return;
- }
-
- let keywords = input.split(" ");
-
- let results = aiDatabase.map(item=>{
-   let score=0;
-   keywords.forEach(word=>{
-     if(item.content.includes(word)) score+=3;
-     if(item.title.toLowerCase().includes(word)) score+=5;
-     if(item.desc.toLowerCase().includes(word)) score+=2;
-   });
-   return {...item,score};
- }).filter(item=>item.score>0);
-
- results.sort((a,b)=>b.score-a.score);
-
- if(results.length===0){
-  box.innerHTML=`<div class="search-item">AI tidak menemukan hasil relevan</div>`;
-const aiDatabase = [
- {title:"Tentang Fahmi",desc:"Profil owner dan developer SA-MP profesional",content:"fahmi owner developer profesional samp",page:"about.html"},
- {title:"Scripting Pawn",desc:"Pembuatan dan perbaikan script SA-MP",content:"scripting pawn coding fitur samp",page:"menu.html"},
- {title:"Mapping SA-MP",desc:"Mapping interior dan exterior server",content:"mapping interior exterior map",page:"menu.html"},
- {title:"Textdraw SA-MP",desc:"UI textdraw modern",content:"textdraw ui design tampilan",page:"menu.html"},
- {title:"Fix Bug",desc:"Perbaikan bug crash warning error",content:"fix bug crash error warning",page:"menu.html"},
- {title:"Kontak Owner",desc:"WhatsApp, Email, Instagram",content:"kontak whatsapp email instagram",page:"contact.html"},
- {title:"Order Layanan",desc:"Form order dan pembayaran jasa",content:"order pembayaran form jasa",page:"payments.html"}
-];
-
-let activeIndex=-1;
-
-function aiSearch(){
- const input=document.getElementById("searchInput").value.toLowerCase();
- const box=document.getElementById("searchResults");
- box.innerHTML="";
- activeIndex=-1;
-
- if(input.length<2){
-  box.style.display="none";
-  return;
- }
-
- let words=input.split(" ");
-
- let results=aiDatabase.map(item=>{
-  let score=0;
-  words.forEach(w=>{
-   if(item.content.includes(w)) score+=3;
-   if(item.title.toLowerCase().includes(w)) score+=5;
-   if(item.desc.toLowerCase().includes(w)) score+=2;
-  });
-  return {...item,score};
- }).filter(i=>i.score>0);
-
- results.sort((a,b)=>b.score-a.score);
-
- if(results.length===0){
-  box.innerHTML=`<div class="search-item">Tidak ditemukan</div>`;
- } else {
-  results.forEach(r=>{
-   const title=highlight(r.title,input);
-   const desc=highlight(r.desc,input);
-
-   box.innerHTML+=`
-    <div class="search-item" onclick="location.href='${r.page}?q=${encodeURIComponent(input)}'">
-     <div class="search-title">${title}</div>
-     <div class="search-desc">${desc}</div>
-    </div>
-   `;
-  });
- }
-
- box.style.display="block";
-}
-
-function highlight(text,input){
- let words=input.split(" ");
- words.forEach(w=>{
-  let r=new RegExp(`(${w})`,"gi");
-  text=text.replace(r,`<span class="highlight">$1</span>`);
- });
- return text;
-}
-
-function searchKey(e){
- const items=document.querySelectorAll(".search-item");
-
- if(e.key==="ArrowDown"){activeIndex++; if(activeIndex>=items.length) activeIndex=0;}
- if(e.key==="ArrowUp"){activeIndex--; if(activeIndex<0) activeIndex=items.length-1;}
- if(e.key==="Enter" && activeIndex>=0){items[activeIndex].click();}
-
- items.forEach(i=>i.classList.remove("active"));
- if(items[activeIndex]) items[activeIndex].classList.add("active");
-}
-const params=new URLSearchParams(window.location.search);
-const keyword=params.get("q");
-
-if(keyword){
- document.body.innerHTML=document.body.innerHTML.replace(
-  new RegExp(`(${keyword})`,"gi"),
-  `<span class="text-highlight">$1</span>`
- );
-}
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

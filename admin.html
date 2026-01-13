@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard - SAMP Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="auth-container" id="loginContainer">
+  <h2>Login Admin</h2>
+  <input type="text" id="loginUsername" placeholder="Username">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button onclick="loginAdmin()">Login</button>
+  <p>Belum punya akun? <span class="link" onclick="showRegister()">Register</span></p>
+</div>
+
+<!-- REGISTER -->
+<div class="auth-container" id="registerContainer" style="display:none;">
+  <h2>Register Admin</h2>
+  <input type="text" id="regUsername" placeholder="Username">
+  <input type="password" id="regPassword" placeholder="Password">
+  <button onclick="registerAdmin()">Register</button>
+  <p>Sudah punya akun? <span class="link" onclick="showLogin()">Login</span></p>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard-container" id="dashboardContainer" style="display:none;">
+  <header class="dashboard-header">
+    <h2>Admin Dashboard</h2>
+    <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+  </header>
+
+  <section class="dashboard-section">
+    <h3>Daftar Layanan</h3>
+    <ul id="serviceList"></ul>
+    <div class="add-service">
+      <input type="text" id="newService" placeholder="Nama Layanan">
+      <button onclick="addService()">Tambah Layanan</button>
+    </div>
+  </section>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

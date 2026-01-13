@@ -75,9 +75,41 @@
     <span class="close-modal" onclick="closeModal()">×</span>
     <img class="modal-content" id="modalImage" alt="Preview Layanan SAMP Store">
 </div>
-
+<script>
+// Ambil data services dari localStorage
+const servicesData = JSON.parse(localStorage.getItem("services")) || [];
+const container = document.querySelector(".product-list");
+if(servicesData.length > 0){
+    servicesData.forEach(s=>{
+        // Cek kalau id sudah ada (4 layanan awal), biar nggak duplikat
+        if(!document.getElementById(s.id)){
+            const card = document.createElement("article");
+            card.classList.add("product-card");
+            card.id = s.id;
+            card.innerHTML = `<img src="${s.img}" alt="${s.name}"><h2>${s.name}</h2><p>${s.desc}</p><a href="${s.link}" class="btn">Order ${s.name}</a>`;
+            container.appendChild(card);
+        }
+    });
+}
+</script>
 <script src="assets/menu.js"></script>
-
+<script>
+// Ambil data services dari localStorage
+const servicesData = JSON.parse(localStorage.getItem("services")) || [];
+const container = document.querySelector(".product-list");
+if(servicesData.length > 0){
+    servicesData.forEach(s=>{
+        // Cek kalau id sudah ada (4 layanan awal), biar nggak duplikat
+        if(!document.getElementById(s.id)){
+            const card = document.createElement("article");
+            card.classList.add("product-card");
+            card.id = s.id;
+            card.innerHTML = `<img src="${s.img}" alt="${s.name}"><h2>${s.name}</h2><p>${s.desc}</p><a href="${s.link}" class="btn">Order ${s.name}</a>`;
+            container.appendChild(card);
+        }
+    });
+}
+</script>
 </body>
 </html>
 

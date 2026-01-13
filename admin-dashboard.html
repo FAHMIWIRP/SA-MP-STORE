@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard - SAMP Store</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; background: rgba(10,26,60,0.75); color: #fff; }
+.sidebar { background: rgba(10,26,60,0.75); height:100vh; padding-top:20px; }
+.sidebar a { color: #fff; display:block; padding:12px 20px; margin-bottom:5px; border-radius:8px; text-decoration:none; transition:0.3s;}
+.sidebar a:hover, .sidebar a.active { background: rgba(10,26,60,0.9);}
+.navbar-custom { background: rgba(10,26,60,0.75); margin-bottom:20px; }
+.navbar-brand { color:#fff; }
+.card-stat { border-radius:12px; text-align:center; margin-bottom:20px; background: rgba(10,26,60,0.75); box-shadow:0 4px 15px rgba(0,0,0,0.4);}
+.table-dark th, .table-dark td { color:#fff; border-color: rgba(255,255,255,0.1);}
+.table-dark thead { background: rgba(10,26,60,0.75);}
+.table-dark tbody tr:hover { background: rgba(10,26,60,0.85);}
+.btn, .btn-primary { background: rgba(10,26,60,0.75); color:#fff; border:1px solid #fff;}
+.btn:hover, .btn-primary:hover { background: rgba(10,26,60,0.9); color:#fff; border-color:#fff;}
+.form-control, .form-select { background: rgba(10,26,60,0.75); color:#fff; border:1px solid #fff; }
+.form-control:focus, .form-select:focus { background: rgba(10,26,60,0.85); color:#fff; border-color:#1e88ff; }
+.profile-img { width:35px; height:35px; border-radius:50%; object-fit:cover; margin-right:10px;}
+.menu-content { display:none; }
+img.service-img { width:60px; height:40px; object-fit:cover; border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+
+<!-- Sidebar -->
+<div class="col-md-2 sidebar d-none d-md-block">
+    <h4 class="text-center mb-4">SAMP Store</h4>
+    <a href="#" class="active" data-menu="dashboard">Dashboard</a>
+    <a href="#" data-menu="sales">Penjualan</a>
+    <a href="#" data-menu="services">Layanan</a>
+    <a href="#" data-menu="balance">Saldo</a>
+    <a href="#" data-menu="profile">Profil</a>
+    <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<!-- Konten -->
+<div class="col-md-10 ms-sm-auto px-4">
+    <nav class="navbar navbar-expand navbar-custom mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand">Admin Dashboard</span>
+            <div class="d-flex align-items-center">
+                <img src="assets/images/fahmipp.jpg" alt="Admin" class="profile-img">
+                <span id="adminName">Admin</span>
+            </div>
+        </div>
+    </nav>
+
+    <div id="contentArea">
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="menu-content" style="display:block;">
+            <div class="row">
+                <div class="col-md-4"><div class="card-stat"><h2 id="balanceStat">0</h2><p>Saldo Saat Ini</p></div></div>
+                <div class="col-md-4"><div class="card-stat"><h2 id="salesStat">0</h2><p>Total Penjualan</p></div></div>
+                <div class="col-md-4"><div class="card-stat"><h2 id="servicesStat">0</h2><p>Total Layanan</p></div></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <canvas id="salesChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Penjualan -->
+        <div id="sales" class="menu-content">
+            <h5>Daftar Penjualan</h5>
+            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#saleModal">Tambah Penjualan</button>
+            <input type="text" id="searchSales" class="form-control mb-3" placeholder="Search / Filter...">
+            <div class="table-responsive">
+                <table class="table table-dark table-striped" id="salesTable">
+                    <thead><tr><th>#</th><th>Nama</th><th>Produk</th><th>Jumlah</th><th>Total</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Layanan -->
+        <div id="services" class="menu-content">
+            <h5>Daftar Layanan</h5>
+            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#serviceModal">Tambah Layanan</button>
+            <input type="text" id="searchServices" class="form-control mb-3" placeholder="Search / Filter...">
+            <div class="table-responsive">
+                <table class="table table-dark table-striped" id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Layanan</th>
+                            <th>Deskripsi</th>
+                            <th>Link Order</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Saldo -->
+        <div id="balance" class="menu-content">
+            <h5>Pengaturan Saldo</h5>
+            <input type="number" id="balanceInput" class="form-control mb-2" placeholder="Masukkan saldo baru...">
+            <button class="btn btn-primary" onclick="updateBalance()">Update Saldo</button>
+        </div>
+
+        <!-- Profil -->
+        <div id="profile" class="menu-content">
+            <h5>Profil Admin</h5>
+            <input type="text" id="profileName" class="form-control mb-2" placeholder="Nama Admin">
+            <button class="btn btn-primary" onclick="updateProfile()">Update Profil</button>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Modal Penjualan -->
+<div class="modal fade" id="saleModal" tabindex="-1">
+<div class="modal-dialog"><div class="modal-content bg-dark text-white">
+<div class="modal-header"><h5 class="modal-title">Tambah Penjualan</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+<div class="modal-body">
+<form id="saleForm">
+<input type="hidden" id="saleIndex">
+<div class="mb-3"><label>Nama Pembeli</label><input type="text" class="form-control" id="saleName" required></div>
+<div class="mb-3"><label>Produk</label><input type="text" class="form-control" id="saleProduct" required></div>
+<div class="mb-3"><label>Jumlah</label><input type="number" class="form-control" id="saleQty" required></div>
+<div class="mb-3"><label>Total</label><input type="number" class="form-control" id="saleTotal" required></div>
+<div class="mb-3"><label>Tanggal</label><input type="date" class="form-control" id="saleDate" required></div>
+<button type="submit" class="btn btn-primary">Simpan</button>
+</form>
+</div></div></div></div>
+
+<!-- Modal Layanan -->
+<div class="modal fade" id="serviceModal" tabindex="-1">
+<div class="modal-dialog"><div class="modal-content bg-dark text-white">
+<div class="modal-header"><h5 class="modal-title">Tambah Layanan</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+<div class="modal-body">
+<form id="serviceForm">
+<input type="hidden" id="serviceIndex">
+<div class="mb-3"><label>Nama Layanan</label><input type="text" class="form-control" id="serviceName" required></div>
+<div class="mb-3"><label>Deskripsi</label><input type="text" class="form-control" id="serviceDesc" required></div>
+<div class="mb-3"><label>Link Order</label><input type="text" class="form-control" id="serviceLink" required></div>
+<div class="mb-3"><label>Foto URL</label><input type="text" class="form-control" id="serviceImg" placeholder="assets/images/sell.jpg" required></div>
+<button type="submit" class="btn btn-primary">Simpan</button>
+</form>
+</div></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let balance = Number(localStorage.getItem("balance")) || 500000;
+let salesData = JSON.parse(localStorage.getItem("sales")) || [];
+let servicesData = JSON.parse(localStorage.getItem("services")) || [];
+let admin = JSON.parse(localStorage.getItem("admin")) || {username:"Admin"};
+
+// Menu switch
+document.querySelectorAll('.sidebar a[data-menu]').forEach(link=>{
+    link.addEventListener('click',()=>{
+        document.querySelectorAll('.menu-content').forEach(c=>c.style.display="none");
+        document.querySelectorAll('.sidebar a').forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+        document.getElementById(link.getAttribute('data-menu')).style.display="block";
+    });
+});
+
+// Render stats
+function renderStats(){
+    document.getElementById("balanceStat").textContent = balance;
+    document.getElementById("salesStat").textContent = salesData.length;
+    document.getElementById("servicesStat").textContent = servicesData.length;
+}
+renderStats();
+
+// Render sales table
+function renderSales(){
+    const tbody = document.querySelector("#salesTable tbody");
+    tbody.innerHTML = "";
+    salesData.forEach((s,i)=>{
+        tbody.innerHTML += `<tr>
+            <td>${i+1}</td>
+            <td>${s.name}</td>
+            <td>${s.product}</td>
+            <td>${s.qty}</td>
+            <td>${s.total}</td>
+            <td>${s.date}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="editSale(${i})">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteSale(${i})">Hapus</button>
+            </td>
+        </tr>`;
+    });
+}
+renderSales();
+
+// Render services table
+function renderServices(){
+    const tbody = document.querySelector("#servicesTable tbody");
+    tbody.innerHTML = "";
+    servicesData.forEach((s,i)=>{
+        tbody.innerHTML += `<tr>
+            <td>${i+1}</td>
+            <td>${s.name}</td>
+            <td>${s.desc}</td>
+            <td><a href="${s.link}" target="_blank" class="btn btn-sm btn-primary">Order</a></td>
+            <td><img src="${s.img}" alt="${s.name}" class="service-img"></td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="editService(${i})">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteService(${i})">Hapus</button>
+            </td>
+        </tr>`;
+    });
+}
+renderServices();
+
+// Search
+document.getElementById("searchSales").addEventListener("input",(e)=>{
+    const val = e.target.value.toLowerCase();
+    document.querySelectorAll("#salesTable tbody tr").forEach(row=>row.style.display=row.innerText.toLowerCase().includes(val)?"":"none");
+});
+document.getElementById("searchServices").addEventListener("input",(e)=>{
+    const val = e.target.value.toLowerCase();
+    document.querySelectorAll("#servicesTable tbody tr").forEach(row=>row.style.display=row.innerText.toLowerCase().includes(val)?"":"none");
+});
+
+// Balance & profile
+document.getElementById("balanceInput").value=balance;
+function updateBalance(){ balance = Number(document.getElementById("balanceInput").value); localStorage.setItem("balance", balance); renderStats(); alert("Saldo berhasil diupdate!"); }
+document.getElementById("profileName").value=admin.username;
+function updateProfile(){ admin.username=document.getElementById("profileName").value; localStorage.setItem("admin", JSON.stringify(admin)); document.getElementById("adminName").textContent=admin.username; alert("Profil berhasil diupdate!"); }
+
+// CRUD Penjualan
+document.getElementById("saleForm").addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const i=document.getElementById("saleIndex").value;
+    const data={name:document.getElementById("saleName").value,product:document.getElementById("saleProduct").value,qty:Number(document.getElementById("saleQty").value),total:Number(document.getElementById("saleTotal").value),date:document.getElementById("saleDate").value};
+    if(i){ salesData[i]=data; } else { salesData.push(data); }
+    localStorage.setItem("sales", JSON.stringify(salesData));
+    renderSales(); renderStats(); updateChart();
+    bootstrap.Modal.getInstance(document.getElementById("saleModal")).hide();
+});
+function editSale(i){ const s=salesData[i]; document.getElementById("saleIndex").value=i; document.getElementById("saleName").value=s.name; document.getElementById("saleProduct").value=s.product; document.getElementById("saleQty").value=s.qty; document.getElementById("saleTotal").value=s.total; document.getElementById("saleDate").value=s.date; new bootstrap.Modal(document.getElementById("saleModal")).show(); }
+function deleteSale(i){ if(confirm("Hapus data ini?")){ salesData.splice(i,1); localStorage.setItem("sales", JSON.stringify(salesData)); renderSales(); renderStats(); updateChart(); } }
+
+// CRUD Layanan
+document.getElementById("serviceForm").addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const i=document.getElementById("serviceIndex").value;
+    const data={
+        name:document.getElementById("serviceName").value,
+        desc:document.getElementById("serviceDesc").value,
+        link:document.getElementById("serviceLink").value,
+        img:document.getElementById("serviceImg").value
+    };
+    if(i){ servicesData[i]=data; } else { servicesData.push(data); }
+    localStorage.setItem("services", JSON.stringify(servicesData));
+    renderServices(); renderStats();
+    bootstrap.Modal.getInstance(document.getElementById("serviceModal")).hide();
+});
+function editService(i){ const s=servicesData[i]; document.getElementById("serviceIndex").value=i; document.getElementById("serviceName").value=s.name; document.getElementById("serviceDesc").value=s.desc; document.getElementById("serviceLink").value=s.link; document.getElementById("serviceImg").value=s.img; new bootstrap.Modal(document.getElementById("serviceModal")).show(); }
+function deleteService(i){ if(confirm("Hapus data ini?")){ servicesData.splice(i,1); localStorage.setItem("services", JSON.stringify(servicesData)); renderServices(); renderStats(); } }
+
+function logout(){ if(confirm("Yakin ingin logout?")) location.href="index.html"; }
+
+// Chart Pendapatan
+const ctx = document.getElementById('salesChart').getContext('2d');
+let salesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: salesData.map(s=>s.date),
+        datasets: [{
+            label: 'Pendapatan',
+            data: salesData.map(s=>s.total),
+            backgroundColor: 'rgba(30,136,255,0.7)',
+            borderColor: 'rgba(30,136,255,1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
+        plugins: {
+            legend: { labels: { color: '#fff' } }
+        },
+        scales: {
+            x: { ticks: { color:'#fff' } },
+            y: { ticks: { color:'#fff' } }
+        }
+    }
+});
+
+function updateChart(){
+    salesChart.data.labels = salesData.map(s=>s.date);
+    salesChart.data.datasets[0].data = salesData.map(s=>s.total);
+    salesChart.update();
+}
+</script>
+</body>
+</html>

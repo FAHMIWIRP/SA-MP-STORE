@@ -95,6 +95,29 @@
         .btn-kembali:hover {
             background: #0d6cd6;
         }
+        /* Versi modern dan cakep */
+.highlight-scroll {
+  background: linear-gradient(90deg, #ffe57f, #ffd740); /* gradient stabilo */
+  color: #000; /* teks tetap jelas */
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* efek shadow lembut */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover efek ringan */
+.highlight-scroll:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Bisa juga menambahkan efek glow jika mau lebih “stabilo neon” */
+.highlight-scroll.glow {
+  background: #fff176;
+  color: #000;
+  text-shadow: 0 0 5px #fff176, 0 0 10px #ffd54f;
+}
     </style>
 </head>
 <body>
@@ -220,15 +243,76 @@ async function kirimData() {
     }, 1500);
 }
     
-const params=new URLSearchParams(window.location.search);
-const keyword=params.get("q");
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const keyword = params.get("q");
 
-if(keyword){
- document.body.innerHTML=document.body.innerHTML.replace(
-  new RegExp(`(${keyword})`,"gi"),
-  `<span class="text-highlight">$1</span>`
- );
-}
+  if(!keyword || keyword.length < 2) return;
+
+  const regex = new RegExp(keyword, "gi");
+
+  const walk = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: function(node){
+        // skip empty, script, style, noscript
+        if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if(["SCRIPT","STYLE","NOSCRIPT"].includes(node.parentNode.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    },
+    false
+  );
+
+  let node;
+  let firstMatch = null;
+
+  while(node = walk.nextNode()){
+    const matches = [...node.nodeValue.matchAll(regex)];
+    if(matches.length > 0){
+      const frag = document.createDocumentFragment();
+      let lastIndex = 0;
+
+      matches.forEach(m=>{
+        const start = m.index;
+        const end = start + m[0].length;
+
+        // teks sebelum match
+        if(start > lastIndex){
+          frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex,start)));
+        }
+
+        // buat span highlight
+        const mark = document.createElement("span");
+        mark.className = "highlight-scroll";
+        mark.textContent = node.nodeValue.slice(start,end);
+        frag.appendChild(mark);
+
+        if(!firstMatch) firstMatch = mark;
+
+        lastIndex = end;
+      });
+
+      // sisa teks setelah match
+      if(lastIndex < node.nodeValue.length){
+        frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+      }
+
+      node.parentNode.replaceChild(frag,node);
+    }
+  }
+
+  // scroll ke match pertama
+  if(firstMatch){
+    setTimeout(()=>{
+      firstMatch.scrollIntoView({behavior:"smooth", block:"center"});
+    },300);
+  }
+
+})();
+</script>
 </script>
 
 </body>
