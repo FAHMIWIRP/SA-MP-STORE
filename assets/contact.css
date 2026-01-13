@@ -127,3 +127,26 @@ body {
 .contact-form button:hover {
     background: #0d6cd6;
 }
+/* Versi modern dan cakep */
+.highlight-scroll {
+  background: linear-gradient(90deg, #ffe57f, #ffd740); /* gradient stabilo */
+  color: #000; /* teks tetap jelas */
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* efek shadow lembut */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover efek ringan */
+.highlight-scroll:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Bisa juga menambahkan efek glow jika mau lebih “stabilo neon” */
+.highlight-scroll.glow {
+  background: #fff176;
+  color: #000;
+  text-shadow: 0 0 5px #fff176, 0 0 10px #ffd54f;
+}
