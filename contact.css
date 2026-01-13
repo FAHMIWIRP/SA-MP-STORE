@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #0b1a3b;
+    color: white;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #0a1a3c;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0,3,);
+}
+
+.nav-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3 ease;
+}
+.nav-link a.active {
+    border-bottom: 2px solid #1e88ff;
+}
+/* CONTACT CARD */
+.contact-container {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 700px;
+    padding: 35px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
+
+.contact-card h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* CONTACT INFO */
+.contact-info {
+    text-align: left;
+    margin: 0 auto 25px;
+    max-width: 400px;
+    font-size: 15px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: #1e88ff;
+    text-decoration: none;
+}
+
+/* FORM */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+}
+
+.contact-form textarea {
+    height: 120px;
+    resize: none;
+}
+
+.contact-form button {
+    padding: 12px;
+    background: #1e88ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    background: #0d6cd6;
+}
+/* Versi modern dan cakep */
+.highlight-scroll {
+  background: linear-gradient(90deg, #ffe57f, #ffd740); /* gradient stabilo */
+  color: #000; /* teks tetap jelas */
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* efek shadow lembut */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover efek ringan */
+.highlight-scroll:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Bisa juga menambahkan efek glow jika mau lebih “stabilo neon” */
+.highlight-scroll.glow {
+  background: #fff176;
+  color: #000;
+  text-shadow: 0 0 5px #fff176, 0 0 10px #ffd54f;
+}

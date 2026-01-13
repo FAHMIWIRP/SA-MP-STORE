@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #081528;
+    color: white;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #0a1a3c;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0,3,);
+}
+
+.nav-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3 ease;
+}
+.nav-link a.active {
+    border-bottom: 2px solid #1e88ff;
+}
+
+.hero {
+        height: 100vh;
+    background-image: linear-gradient(rgba(10,26,60,0.75), rgba(10,26,60,0.75)),
+    url(images/samp.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    opacity: .8;
+}
+
+/* ABOUT WRAPPER */
+.about-wrapper {
+    height: 100vh;
+    background-image: linear-gradient(rgba(10,26,60,0.75), rgba(10,26,60,0.75)),
+    url(images/samp.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+/* PROFILE */
+.profile-card {
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
+
+.profile-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.3);
+    margin-bottom: 15px;
+}
+
+.profile-card .role {
+    font-size: 14px;
+    opacity: .7;
+    margin-bottom: 10px;
+}
+
+.profile-card .bio {
+    font-size: 15px;
+    opacity: .9;
+    line-height: 1.5;
+}
+
+/* INFO CARD */
+.info-card {
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 20px;
+    width: 440px;
+    backdrop-filter: blur(6px);
+}
+
+.info-card h3 {
+    margin-bottom: 10px;
+}
+
+.info-card ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.info-card ul li {
+    margin-bottom: 8px;
+    opacity: .9;
+}
+
+/* SKILL BARS */
+.skill {
+    margin-bottom: 15px;
+}
+
+.skill span {
+    font-size: 14px;
+}
+
+.skill .bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.skill .bar div {
+    height: 100%;
+    background: #4ea8ff;
+    border-radius: 10px;
+}
+/* Versi modern dan cakep */
+.highlight-scroll {
+  background: linear-gradient(90deg, #ffe57f, #ffd740); /* gradient stabilo */
+  color: #000; /* teks tetap jelas */
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* efek shadow lembut */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover efek ringan */
+.highlight-scroll:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Bisa juga menambahkan efek glow jika mau lebih “stabilo neon” */
+.highlight-scroll.glow {
+  background: #fff176;
+  color: #000;
+  text-shadow: 0 0 5px #fff176, 0 0 10px #ffd54f;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .profile-card, .info-card {
+        width: 100%;
+    }
+}
